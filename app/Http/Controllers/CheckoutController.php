@@ -55,10 +55,19 @@ class CheckoutController extends Controller
                 ->where('customer_email',$email)
                 ->where('customer_pass',$pass)
                 ->first();
-        Session::put('customer_id',$result->customer_id);
-        Session::put('customer_name',$result->customer_name);
-        return Redirect::to('/checkout');
-
+                /*echo "<pre>";
+                print_r($result);
+                exit();
+                echo "</pre>";*/
+        if ($result) {
+            Session::put('customer_id',$result->customer_id);
+            Session::put('customer_name',$result->customer_name);
+            return Redirect::to('/checkout');
+        }else{
+            Session::put('message','Invalid email/password');
+            return Redirect::to('/user-login');
+        }
+        
     }
 
     // shipping save
@@ -84,7 +93,9 @@ class CheckoutController extends Controller
     	return Redirect::to('/');
     }
     // payment
-    public function Payment(){
-        return view('frontend.pages.payment');
+    public function Payment(){ 
+        $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
+              
+        return view('frontend.pages.payment')->with('all_publish_category',$allPublishedCategory);
     }
 }

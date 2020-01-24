@@ -10,6 +10,13 @@ Login | TSF Aquatics
 				<div class="col-sm-5">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
+						<?php
+							$msg = Session::get('message');
+							if ($msg) {
+								echo "<h3 class='alert alert-danger'>".$msg."</h3>";
+							}
+							Session::put('message',Null);
+						?>
 						<form action="{{url('/customer-login')}}" method="post">
 							{{ csrf_field() }}
 							<input type="email" name="customer_email" placeholder="email" />

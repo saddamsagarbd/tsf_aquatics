@@ -16,8 +16,7 @@
                             foreach ($allCategory as $v_category) {?>
                                 <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{URL::to('/ProductByCategory/'.$v_category->id)}}">
-                                        
+                                    <h4 class="panel-title"><a href="{{URL::to('/ProductByCategory/'.$v_category->id)}}">                                       
                                         <?=$v_category->category_name?></a></h4>
                                 </div>
                             </div>
