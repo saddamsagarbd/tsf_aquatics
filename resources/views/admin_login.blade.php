@@ -47,7 +47,7 @@
             ?>
           </div>
         <div class="card-body">
-          <form method="POST" action="{{url('/admin-dashboard')}}">
+          <form method="POST" action="{{url('/admin-login-check')}}">
             {{ csrf_field() }}
             <div class="form-group">
               <div class="form-label-group">

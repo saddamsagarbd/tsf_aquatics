@@ -16,7 +16,7 @@ class AdminController extends Controller
     	return view('admin_login');
     }
 
-    public function adminDashboard(Request $request)
+    public function adminLoginCheck(Request $request)
     {
     	$admin_email = $request->admin_email;
     	$admin_password = $request->admin_password;

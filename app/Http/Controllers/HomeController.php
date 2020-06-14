@@ -12,9 +12,10 @@ class HomeController extends Controller
 {
     public function index(){
 
-    	$allProduct = DB::table('tbl_product')    				
+    	$products = DB::table('tbl_product')    				
     				->get();
-    	return view('frontend.pages.homecontent')->with('showPorduct',$allProduct);
+    	// return view('frontend.pages.homecontent')->with('showPorduct',$allProduct);
+        return view('website.layout.master')->with('products', $products);
     }
 
     // show product by category

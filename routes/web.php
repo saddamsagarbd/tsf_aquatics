@@ -23,7 +23,7 @@ Route::get('/user-post','HomeController@userPost');*/
 Route::get('/logout','SuperAdminController@logout');
 Route::get('/backend','AdminController@index');
 Route::get('/dashboard','SuperAdminController@index');
-Route::post('/admin-dashboard','AdminController@adminDashboard');
+Route::post('/admin-login-check','AdminController@adminLoginCheck');
 
 /*
 ==============================================
