@@ -6,17 +6,13 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Cart;
+use Validator;
 use Illuminate\support\Facades\Redirect;
 session_start();
 
 class CheckoutController extends Controller
 {
     public function index(){
-        /*$all_published_category = DB::table('tbl_categories')
-                                ->where('publication_status',1)
-                                ->get();
-        $manage_published_category = view('frontend.pages.checkout')
-                                    ->with('all_published_category',$all_published_category);*/
         return view('frontend.pages.checkout');
 
     }
@@ -39,10 +35,10 @@ class CheckoutController extends Controller
     	$data['customer_pass']=md5($request->customer_pass);
 
     	$customer_id=DB::table('tbl_customer')
-    				->insertGetId($data);
-    	Session::put('customer_id',$customer_id);
-    	Session::put('customer_name',$request->customer_name);
-    	return Redirect::to('/checkout');
+        ->insertGetId($data);
+        Session::put('customer_id',$customer_id);
+        Session::put('customer_name',$request->customer_name);
+        return Redirect::to('/checkout');
     }
 
     // customer login
@@ -52,50 +48,102 @@ class CheckoutController extends Controller
         $pass = md5($request->customer_pass);
 
         $result = DB::table('tbl_customer')
-                ->where('customer_email',$email)
-                ->where('customer_pass',$pass)
-                ->first();
+        ->where('customer_email',$email)
+        ->where('customer_pass',$pass)
+        ->first();
                 /*echo "<pre>";
                 print_r($result);
                 exit();
                 echo "</pre>";*/
-        if ($result) {
-            Session::put('customer_id',$result->customer_id);
-            Session::put('customer_name',$result->customer_name);
-            return Redirect::to('/checkout');
-        }else{
-            Session::put('message','Invalid email/password');
-            return Redirect::to('/user-login');
-        }
-        
-    }
+                if ($result) {
+                    Session::put('customer_id',$result->customer_id);
+                    Session::put('customer_name',$result->customer_name);
+                    return Redirect::to('/checkout');
+                }else{
+                    Session::put('message','Invalid email/password');
+                    return Redirect::to('/user-login');
+                }
+
+            }
 
     // shipping save
-    public function saveShipping(Request $request){
-    	$data=array();
-    	$data['shipping_email']			=$request->shipping_email;
-    	$data['shipping_first_name']	=$request->shipping_first_name;
-    	$data['shipping_last_name']		=$request->shipping_last_name;
-    	$data['shipping_address']		=$request->shipping_address;
-    	$data['shipping_phone']			=$request->shipping_phone;
-    	$data['shipping_city']			=$request->shipping_city;
+        public function saveShipping(Request $request){
+                $validator = Validator::make($request->all(),[
+                    'shipping_email' => 'required',
+                    'shipping_first_name' => 'required',
+                    'shipping_last_name' => 'required',
+                    'shipping_address' => 'required',
+                    'shipping_phone' => 'required',
+                    'shipping_city' => 'required'
+                ]);
 
-    	$shipping_id=DB::table('tbl_shipping')
-    				->insertGetId($data);
-    	Session::put('shipping_id',$shipping_id);
-    	return Redirect::to('/payment');
-    }
+                if ($validator->fails()) {
+
+                  return Redirect::to('/checkout')->with(['errors'=>$validator->errors()]);
+              }else{
+                $data=array();
+                $data['shipping_email']         =$request->shipping_email;
+                $data['shipping_first_name']    =$request->shipping_first_name;
+                $data['shipping_last_name']     =$request->shipping_last_name;
+                $data['shipping_address']       =$request->shipping_address;
+                $data['shipping_phone']         =$request->shipping_phone;
+                $data['shipping_city']          =$request->shipping_city;
+                $data['customer_id']            =Session::get('customer_id');
+
+
+                $shipping_id = DB::table('tbl_shipping')
+                                ->insertGetId($data);
+                Session::put('shipping_id', $shipping_id);
+                
+                $count_orders = DB::table('place_orders')->get();
+                
+                $products = Cart::content();
+                $product_ids = [];
+                
+                foreach ($products as $product) {
+
+                    array_push($product_ids, $product->id);
+
+                }
+
+                $order = [];
+                $initial_digit = 100 + count($count_orders);
+                $order['order_id'] = '#SP-'.($initial_digit + 1);
+                $order['order_details'] = json_encode($product_ids);
+                $order['order_subtotal'] = Cart::subtotal();
+                $order['shipping_charge'] = 50;
+                $order['order_total'] = Cart::total() + 50;
+                $order['shipping_id'] = Session::get('shipping_id');
+                $order['order_placed_by'] = Session::get('customer_id');
+                $order['created_at'] = date('Y-m-d H:i:s');
+
+                DB::table('place_orders')->insert($order);
+
+                return Redirect::to('/payment');
+
+            }
+        }
     // customer logout
-    public function customerLogout(){
-    	Session::flush();
-    	Cart::destroy();
+        public function customerLogout(){
+           Session::flush();
+           Cart::destroy();
     	//Session::put('msg','Successfully Logout');
-    	return Redirect::to('/');
-    }
+           return Redirect::to('/');
+       }
     // payment
-    public function Payment(){ 
+       public function Payment(){ 
         $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
-              
-        return view('frontend.pages.payment')->with('all_publish_category',$allPublishedCategory);
+
+        $order = DB::table('place_orders')
+                    ->select('place_orders.*', 'tbl_shipping.*')
+                    ->join('tbl_shipping', "tbl_shipping.shipping_id", "place_orders.shipping_id") 
+                    ->where([
+                        'place_orders.order_placed_by' => Session::get('customer_id'), 
+                        'place_orders.payment_status' => 0]
+                    )
+                    ->orderBy('place_orders.id', 'desc')
+                    ->first();
+
+        return view('frontend.pages.payment')->with(['order' => $order,'all_publish_category' => $allPublishedCategory]);
     }
 }

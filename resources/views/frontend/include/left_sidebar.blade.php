@@ -8,7 +8,6 @@
                             <?php
                             $allCategory = DB::table('tbl_categories')
                                             ->where('publication_status',1)
-                                            ->limit(3)
                                             ->get();
 
                             
@@ -27,40 +26,23 @@
                             ?>                            
                             
                         </div><!--/category-products-->
-                    
-                        <div class="brands_products"><!--brands_products-->
-                            <h2>Brands</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <?php
-                                        $allBrand = DB::table('tbl_manufactur')
-                                                        ->where('publication_status',1)
-                                                        ->get();
-                                        /*$countBrand = DB::table('tbl_manufactur')->count();*/
 
-                                        foreach ($allBrand as $v_brand) {?>
-                                            <li><a href="#"> <!-- <span class="pull-right">()</span> -->{{ $v_brand->manufacture_name}}</a></li>
-                                        <?php 
-                                        }
-                                        
 
-                                    ?>
-                                    
-                                </ul>
-                            </div>
-                        </div><!--/brands_products-->
-                        
-                        <div class="price-range"><!--price-range-->
+                        <!--price-range-->
+                        <!-- <div class="price-range">
                             <h2>Price Range</h2>
                             <div class="well text-center">
                                  <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
                                  <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
                             </div>
-                        </div><!--/price-range-->
+                        </div> -->
+                        <!--/price-range-->
                         
-                        <div class="shipping text-center"><!--shipping-->
+                        <!--shipping-->
+                        <!-- <div class="shipping text-center">
                             <img src="{{asset('frontend/images/aquarium/7.jpg')}}" alt="" />
-                        </div><!--/shipping-->
+                        </div> -->
+                        <!--/shipping-->
                     
                     </div>
                 </div>

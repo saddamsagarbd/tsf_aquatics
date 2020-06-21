@@ -21,6 +21,7 @@ class CreateTblShippingTable extends Migration
             $table->string('shipping_address');
             $table->string('shipping_phone');
             $table->string('shipping_city');
+            $table->integer('customer_id');
             $table->timestamps();
         });
     }

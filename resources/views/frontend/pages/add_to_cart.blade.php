@@ -30,11 +30,7 @@ Shopping Cart | TSF Aquatics
 						<?php
 							$contents = Cart::content();
 
-							/*echo "<pre>";
-							print_r($contents);
-							echo "</pre>";*/
 							foreach($contents as $cart_list){
-							
 						?>
 						
 						<tr>
@@ -81,8 +77,14 @@ Shopping Cart | TSF Aquatics
 						<ul>
 							<li>Cart Sub Total <span>{{Cart::subtotal()}}</span></li>
 							<li>Eco Tax <span>{{Cart::tax()}}</span></li>
-							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>{{Cart::total()}}</span></li>
+							<?php
+								$shipping_charge = 0;
+								if(Cart::subtotal() != 0){
+									$shipping_charge = 50;
+								}
+							?>
+							<li>Shipping Cost <span>{{ $shipping_charge }}</span>Tk</li>
+							<li>Total <span>{{Cart::total() + $shipping_charge}}</span></li>
 						</ul>
 						<?php
                             $customer_id = Session::get('customer_id');

@@ -175,20 +175,22 @@
               <div class="ps-cart__listing">
                 <div class="ps-cart__content">
                   <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="{{ asset('assets/images/cart-preview/1.jpg')}}" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
+                    <div class="ps-cart-item__thumbnail"><a href=""></a>
+                      <img src="{{ asset('assets/images/cart-preview/1.jpg')}}" alt=""></div>
+                    <div class="ps-cart-item__content">
+                      <a class="ps-cart-item__title" href="">Amazin’ Glazin’</a>
                       <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
                     </div>
                   </div>
                   <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="{{ asset('assets/images/cart-preview/2.jpg')}}" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>
+                    <div class="ps-cart-item__thumbnail"><a href=""></a><img src="{{ asset('assets/images/cart-preview/2.jpg')}}" alt=""></div>
+                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="">The Crusty Croissant</a>
                       <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
                     </div>
                   </div>
                   <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="{{asset('assets/images/cart-preview/3.jpg')}}" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>
+                    <div class="ps-cart-item__thumbnail"><a href=""></a><img src="{{asset('assets/images/cart-preview/3.jpg')}}" alt=""></div>
+                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="">The Rolling Pin</a>
                       <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
                     </div>
                   </div>
@@ -278,13 +280,14 @@
                     <div class="ps-shoe mb-30">
                       <div class="ps-shoe__thumbnail">
                           <a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a>
-                          <?php
-                            $product_image = "{{asset('".$product->product_image."')}}";
-                          ?>
-                          <img src='{{  }}' alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                          <!-- <?php
+                            //$product_image = "{{asset('".$product->product_image."')}}";
+                          ?> -->
+                          <img src='{{ $product->product_image }}' alt="">
+                          <a class="ps-shoe__overlay" href=""></a>
                       </div>
                       <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
+                        <!-- <div class="ps-shoe__variants">
                           <div class="ps-shoe__variant normal">
                             <img src="{{asset('assets/images/shoe/2.jpg')}}" alt="">
                             <img src="{{asset('assets/images/shoe/3.jpg')}}" alt="">
@@ -298,7 +301,7 @@
                             <option value="1">4</option>
                             <option value="2">5</option>
                           </select>
-                        </div>
+                        </div> -->
                         <div class="ps-shoe__detail">
                           <a class="ps-shoe__name" href="#">
                             {{ $product->product_name }}
@@ -381,7 +384,7 @@
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/1.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/1.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
@@ -404,7 +407,7 @@
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
                     <div class="ps-badge"><span>New</span></div>
-                    <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/2.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                    <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/2.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
@@ -427,7 +430,7 @@
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/3.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/3.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
@@ -448,7 +451,7 @@
               </div>
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/4.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/4.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
@@ -470,7 +473,7 @@
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/5.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/5.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
@@ -491,7 +494,7 @@
               </div>
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/6.jpg')}}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{asset('assets/images/shoe/6.jpg')}}" alt=""><a class="ps-shoe__overlay" href=""></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
