@@ -19,18 +19,13 @@ class CartController extends Controller
     		           ->where('product_id',$product_id)
     		           ->first();
 
-    		           /*echo "<pre>";
-    		           print_r($productInfo);
-    		           echo "</pre>";
-                       exit();*/
-
         $data = array();
-        $data['qty'] = $qty;
-        $data['id'] = $productInfo->product_id;
+        $data['qty'] = $request->qty;
+        $data['id'] = $request->product_id;
         $data['name'] = $productInfo->product_name;
-        //$data['qty'] = $productInfo->product_qty;
         $data['price'] = $productInfo->product_price;
         $data['options']['img']=$productInfo->product_image;
+
         Cart::add($data);
 
     	return Redirect::to('/show-cart');
@@ -39,8 +34,7 @@ class CartController extends Controller
     public function showCart(){
         $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
 
-        return view('frontend.pages.add_to_cart')
-        ->with('all_publish_category',$allPublishedCategory);
+        return view('frontend.pages.add_to_cart')->with('all_publish_category',$allPublishedCategory);
 
     }
         // delete product from cart

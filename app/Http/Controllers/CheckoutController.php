@@ -7,6 +7,7 @@ use DB;
 use Session;
 use Cart;
 use Validator;
+use PDF;
 use Illuminate\support\Facades\Redirect;
 session_start();
 
@@ -131,7 +132,7 @@ class CheckoutController extends Controller
            return Redirect::to('/');
        }
     // payment
-       public function Payment(){ 
+       public function Payment(){
         $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
 
         $order = DB::table('place_orders')

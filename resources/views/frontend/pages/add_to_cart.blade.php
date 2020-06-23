@@ -31,6 +31,7 @@ Shopping Cart | TSF Aquatics
 							$contents = Cart::content();
 
 							foreach($contents as $cart_list){
+
 						?>
 						
 						<tr>
@@ -54,7 +55,7 @@ Shopping Cart | TSF Aquatics
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">{{$cart_list->total}}</p>
+								<p class="cart_total_price">{{($cart_list->total ?? 0)}}</p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href="{{URL::to('/delete-cart-row/'.$cart_list->rowId)}}"><i class="fa fa-times"></i></a>
@@ -75,8 +76,8 @@ Shopping Cart | TSF Aquatics
 				<div class="col-sm-6 pull-right">
 					<div class="total_area">
 						<ul>
-							<li>Cart Sub Total <span>{{Cart::subtotal()}}</span></li>
-							<li>Eco Tax <span>{{Cart::tax()}}</span></li>
+							<li>Cart Sub Total <span>{{(Cart::subtotal() ?? 0)}}</span></li>
+							<li>Eco Tax <span>{{(Cart::tax() ?? 0)}}</span></li>
 							<?php
 								$shipping_charge = 0;
 								if(Cart::subtotal() != 0){
@@ -84,7 +85,7 @@ Shopping Cart | TSF Aquatics
 								}
 							?>
 							<li>Shipping Cost <span>{{ $shipping_charge }}</span>Tk</li>
-							<li>Total <span>{{Cart::total() + $shipping_charge}}</span></li>
+							<li>Total <span>{{(Cart::total() ?? 0) + ($shipping_charge ?? 0)}}</span></li>
 						</ul>
 						<?php
                             $customer_id = Session::get('customer_id');
