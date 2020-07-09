@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CustomerInvoiceMail;
 use Illuminate\Http\Request;
 use DB;
 use Session;
@@ -9,6 +10,7 @@ use Cart;
 use Validator;
 use PDF;
 use Illuminate\support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 session_start();
 
 class CheckoutController extends Controller
@@ -39,7 +41,8 @@ class CheckoutController extends Controller
         ->insertGetId($data);
         Session::put('customer_id',$customer_id);
         Session::put('customer_name',$request->customer_name);
-        return Redirect::to('/checkout');
+//        return Redirect::to('/checkout');
+        return \redirect('/checkout');
     }
 
     // customer login
@@ -69,6 +72,10 @@ class CheckoutController extends Controller
 
     // shipping save
         public function saveShipping(Request $request){
+
+            return $this->sendMailToCustomer($request, $data);
+            return $request->all();
+
                 $validator = Validator::make($request->all(),[
                     'shipping_email' => 'required',
                     'shipping_first_name' => 'required',
@@ -146,5 +153,23 @@ class CheckoutController extends Controller
                     ->first();
 
         return view('frontend.pages.payment')->with(['order' => $order,'all_publish_category' => $allPublishedCategory]);
+    }
+
+    protected function sendMailToCustomer($request, $data)
+    {
+//        return view('mail.customer-invoice-template', ['data' => '']);
+        try {
+            $customer_email = 'akashm21412111026@gmail.com';
+            $data = [
+                'name' => 'M.A Aziz',
+                'address' => 'Ashkona hazicamp'
+            ];
+
+            Mail::to($customer_email)
+                ->send(new CustomerInvoiceMail($data));
+            return 'Mail send success to customer';
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 }

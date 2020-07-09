@@ -28,10 +28,11 @@ class CartController extends Controller
 
         Cart::add($data);
 
-    	return Redirect::to('/show-cart');
+    	return \redirect('/show-cart');
     }
 
     public function showCart(){
+
         $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
 
         return view('frontend.pages.add_to_cart')->with('all_publish_category',$allPublishedCategory);

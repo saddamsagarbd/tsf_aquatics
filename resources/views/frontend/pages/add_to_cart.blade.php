@@ -85,7 +85,7 @@ Shopping Cart | TSF Aquatics
 								}
 							?>
 							<li>Shipping Cost <span>{{ $shipping_charge }}</span>Tk</li>
-							<li>Total <span>{{(Cart::total() ?? 0) + ($shipping_charge ?? 0)}}</span></li>
+							<li>Total <span>{{ (float)(Cart::total() ?? 0) + (float)($shipping_charge ?? 0) }}</span></li>
 						</ul>
 						<?php
                             $customer_id = Session::get('customer_id');
