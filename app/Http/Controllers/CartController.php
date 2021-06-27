@@ -35,7 +35,7 @@ class CartController extends Controller
 
         $allPublishedCategory = DB::table('tbl_categories')->where('publication_status',1)->get();
 
-        return view('frontend.pages.add_to_cart')->with('all_publish_category',$allPublishedCategory);
+        return view('frontend.pages.cart')->with('all_publish_category',$allPublishedCategory);
 
     }
         // delete product from cart
@@ -46,11 +46,13 @@ class CartController extends Controller
     // update cart
 
     public function updateCart(Request $request){
-
         $qty = $request->quantity;
         $rowId = $request->rowId;
-        Cart::update($rowId,$qty);
-        return Redirect::to('/show-cart');
+        // return Redirect::to('/show-cart');
+        if(Cart::update($rowId,$qty)){
+            return json_encode(["status" => "success"], 200);
+        }
+        return json_encode(["status" => "error"], 503);
 
     }
 }

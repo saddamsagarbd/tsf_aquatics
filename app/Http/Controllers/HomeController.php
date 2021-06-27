@@ -36,7 +36,7 @@ class HomeController extends Controller
                         ->where('tbl_product.publication_status',1)                      
                         ->first();
 
-        return view('frontend.pages.product_by_id')->with('product_manage',$productById);
+        return view('frontend.pages.product_details')->with('product_manage',$productById);
 
     }
 

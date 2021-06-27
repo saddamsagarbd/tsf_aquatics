@@ -154,5 +154,6 @@
 </script>
 <!-- ../../../static.cloudflareinsights.com/beacon.min.js -->
 <script defer src="{{ asset('assets/js/beacon.min.js') }}" data-cf-beacon='{"rayId":"665035186f1a5500","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.5.2","si":10}'></script>
+@yield('custom-script')
 </body>
 </html>

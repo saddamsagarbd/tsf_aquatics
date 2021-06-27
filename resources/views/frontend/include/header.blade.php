@@ -8,7 +8,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/xfavicon.png.pagespeed.ic.nKD-xMXOhN.png') }}">
       <link rel="stylesheet" href="{{ asset('assets/css/A.bootstrap.min.css%2bowl.carousel.min.css%2bslicknav.css%2bflaticon.css%2banimate.min.css%2bprice_rangs.css%2bmagnific-popup.css%2bfontawesome-all.min.css%2bthemify-icons.cs') }}" />
-      <link rel="stylesheet" href="{{ asset('assets/css/A.style.css.pagespeed.cf.JskPZz8FF4.css') }}">
+      <!-- <link rel="stylesheet" href="{{ asset('assets/css/style.php') }}"> -->
+      @include('frontend.include.style')
    </head>
    <body>
       <div id="preloader-active">

@@ -20,11 +20,7 @@ class ProductController extends Controller
                         ->join('tbl_categories','tbl_product.category_id','=','tbl_categories.id')
                         ->join('tbl_manufactur','tbl_product.manufacture_id','=','tbl_manufactur.id')
                         ->select('tbl_product.*','tbl_categories.category_name','tbl_manufactur.manufacture_name')                        
-                        ->get();
-        /*echo "<pre>";
-        print_r($allProducts);
-        echo "<pre>";
-        exit();*/              
+                        ->get();           
         return view('admin_panel.all_product')->with('all_products',$allProducts);
     }
 
@@ -69,7 +65,6 @@ class ProductController extends Controller
 
     // Unactive product
     public function unActiveProduct($product_id){
-        /*echo $id;*/
         DB::table('tbl_product')
             ->where('product_id',$product_id)
             ->update(['publication_status'=>0]);
@@ -79,7 +74,6 @@ class ProductController extends Controller
 
     // Active product
     public function activeProduct($product_id){
-        /*echo $id;*/
         DB::table('tbl_product')
             ->where('product_id',$product_id)
             ->update(['publication_status'=>1]);
