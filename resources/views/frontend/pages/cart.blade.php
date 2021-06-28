@@ -56,9 +56,9 @@ Cart | E-BazaarShodai
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                    <span class="input-number-decrement" data-row_id="{{$cart_list->rowId}}"> <i class="ti-minus"></i></span>
-                                    <input class="input-number {{$cart_list->rowId}}_qty" type="text" value="{{$cart_list->qty}}" min="1" max="10">
-                                    <span class="input-number-increment" data-row_id="{{$cart_list->rowId}}"> <i class="ti-plus"></i></span>
+                                    <span class="input-number-decrement" data-rel="0" data-row_id="{{$cart_list->rowId}}"> <i class="ti-minus"></i></span>
+                                    <input class="input-number product_qty {{$cart_list->rowId}}_qty" data-row_id="{{$cart_list->rowId}}" type="text" value="{{$cart_list->qty}}" min="1" max="10">
+                                    <span class="input-number-increment" data-rel="1" data-row_id="{{$cart_list->rowId}}"> <i class="ti-plus"></i></span>
                                     </div>
                                 </td>
                                 <td>
@@ -140,13 +140,7 @@ Cart | E-BazaarShodai
                 'X-CSRF-TOKEN': {!! json_encode(csrf_token()) !!},
             }
         });
-        $(document).on("click", ".input-number-increment, .input-number-decrement", function(){
-            var rowId = $(this).data("row_id");
-            console.log('rowId:' + rowId);
-            var qty = $("."+rowId+"_qty").val();
-            console.log('qty:' + qty);
-            $("."+rowId+"_qty").attr('value', parseInt(qty));
-
+        function updateCart(qty, rowId){
             $.ajax({
                 url:"{{url('/update-cart')}}",
                 method:"POST",
@@ -154,13 +148,34 @@ Cart | E-BazaarShodai
                 dataType:"JSON",
                 success:function(response)
                 {
-                    console.log('test:' + response.status);
                     if(response.status == "success"){
-                        $('.cart_inner').load(document.URL +  ' .cart_inner');
+                        $(document).find('.cart_inner').load(window.location.href +  ' .cart_inner');
                     }
                 }
             });
+        }
+        $(document).on("click", ".input-number-increment, .input-number-decrement", function(e){
+            e.preventDefault();
+            var rowId = $(this).data("row_id");
+            var rel = $(this).data("rel");
+            var qty = $("."+rowId+"_qty").val();
+            if(rel == 0){
+                qty = (parseInt(qty) - 1);
+            }
+            if(rel == 1){
+                qty = (parseInt(qty) + 1);
+            }
+            $("."+rowId+"_qty").attr('value', parseInt(qty));
 
+            updateCart(qty, rowId);
+
+        })
+
+        $(document).on("keyup", ".product_qty", function(e){
+            e.preventDefault();
+            var qty = $(this).val();
+            var rowId = $(this).data("row_id");
+            updateCart(qty, rowId);
         })
 
     });
