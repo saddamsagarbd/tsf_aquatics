@@ -28,6 +28,10 @@ class CheckoutController extends Controller
 
     // customer registration
 
+    public function registration(){
+        return view('frontend.pages.user_registration');
+    }
+
     public function customer_registration(Request $request){
 
     	$data = array();

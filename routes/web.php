@@ -83,6 +83,7 @@ Route::post('/update-cart','CartController@updateCart');
 */
 Route::get('/user-login','CheckoutController@LoginCheck');
 Route::get('/checkout','CheckoutController@index');
+Route::get('/user-registration','CheckoutController@registration');
 Route::post('/customer-registration','CheckoutController@customer_registration');
 Route::post('/customer-login','CheckoutController@customer_login');
 Route::post('/save-shipping','CheckoutController@saveShipping');
