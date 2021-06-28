@@ -35,6 +35,7 @@ Cart | E-BazaarShodai
                             <th scope="col">Product</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,6 +64,9 @@ Cart | E-BazaarShodai
                                 </td>
                                 <td>
                                     <h5 class="{{$cart_list->rowId}}_price">Tk.{{($cart_list->price ?? 0)}}</h5>
+                                </td>
+                                <td>
+                                    <a href="" class="remove_from_cart" data-row_id="{{$cart_list->rowId}}"><i class="ti-close red"></i></a>
                                 </td>
                             </tr>
                         <?php
@@ -176,6 +180,22 @@ Cart | E-BazaarShodai
             var qty = $(this).val();
             var rowId = $(this).data("row_id");
             updateCart(qty, rowId);
+        })
+
+        $(document).on("click", ".remove_from_cart", function(e){
+            e.preventDefault();
+            var rowId = $(this).data("row_id");
+            $.ajax({
+                url: '{{ URL::to("/delete-cart-row") }}'+'/'+rowId,
+                method: 'get',
+                dataType: 'json',
+                success:function(response)
+                {                   
+                    if(response.status == "success"){
+                        $(document).find('.cart_inner').load(window.location.href +  ' .cart_inner');
+                    }
+                }
+            });
         })
 
     });

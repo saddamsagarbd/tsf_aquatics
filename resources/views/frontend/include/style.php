@@ -153,6 +153,9 @@
 		color: #fff;
 		outline: medium none
 	}
+	.red {
+		color: #ff0000;
+	}
 
 	button:focus,
 	input:focus,
@@ -1374,7 +1377,7 @@
 		-o-transition: all .4s ease-out 0s;
 		transition: all .4s ease-out 0s;
 		position: absolute;
-		content: "<?= Cart::count(); ?>";
+		content: "<?= Cart::content()->count(); ?>";
 		background: #ff2020;
 		color: #fff;
 		text-align: center;

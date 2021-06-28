@@ -28,6 +28,10 @@ class CartController extends Controller
 
         Cart::add($data);
 
+        if(isset($request->action) && $request->action == "cartIcon"){
+            return \redirect('/');
+        }
+
     	return \redirect('/show-cart');
     }
 
@@ -38,10 +42,12 @@ class CartController extends Controller
         return view('frontend.pages.cart')->with('all_publish_category',$allPublishedCategory);
 
     }
-        // delete product from cart
+    // delete product from cart
     public function deleteCart($rowId){
-        Cart::update($rowId,0);
-        return Redirect::to('/show-cart');
+        Cart::remove($rowId);
+        return json_encode(["status" => "success"], 200);
+        
+        // return Redirect::to('/show-cart');
     }
     // update cart
 

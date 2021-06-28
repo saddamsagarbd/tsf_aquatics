@@ -102,7 +102,7 @@ Home | E-BazaarShodai
                         <div class="properties-img">
                            <a href="{{URL::to('/view-product/'.$f_product->product_id)}}"><img src="assets/img/gallery/latest5.jpg" alt=""></a>
                            <div class="socal_icon">
-                              <a href="#" class="addToCart" data-productId="{{ $f_product->product_id }}"><i class="ti-shopping-cart"></i></a>
+                              <a href="#" class="addToCart" data-product_id="{{ $f_product->product_id }}"><i class="ti-shopping-cart"></i></a>
                               <a href="#"><i class="ti-heart"></i></a>
                               <a href="#"><i class="ti-zoom-in"></i></a>
                            </div>
@@ -414,4 +414,35 @@ Home | E-BazaarShodai
          </div>
       </div>
    </div>
+@endsection
+@section('custom-script')
+<script>
+   $(document).ready(function(){
+      $.ajaxSetup({
+         headers: {
+               'X-CSRF-TOKEN': {!! json_encode(csrf_token()) !!},
+         }
+      });
+      function addToCart(productId){
+         console.log('productId:' + productId);
+         $.ajax({
+               url:"{{url('/add-to-cart')}}",
+               method:"POST",
+               data:{product_id: productId, qty: 1, action: "cartIcon"},
+               dataType:"JSON",
+               success:function(response)
+               {
+                  
+               }
+         });
+      }
+      $(document).on("click", ".addToCart", function(e){
+         e.preventDefault();
+         var productId = $(this).data('product_id');
+         console.log('productId:' + productId);
+         addToCart(productId);
+      })
+
+   });
+</script>
 @endsection

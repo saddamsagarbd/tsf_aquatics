@@ -17,7 +17,7 @@
             <div class="preloader-inner position-relative">
                <div class="preloader-circle"></div>
                <div class="preloader-img pere-text">
-                  <img src="assets/img/icon/xloder.png.pagespeed.ic.nKD-xMXOhN.png" alt="loder">
+                  <img src="{{ asset('assets/img/icon/xloder.png.pagespeed.ic.nKD-xMXOhN.png') }}" alt="loder">
                </div>
             </div>
          </div>
@@ -59,7 +59,7 @@
                <div class="container">
                   <div class="menu-wrapper">
                      <div class="logo">
-                        <a href="index-2.html"><img src="assets/img/logo/xlogo.png.pagespeed.ic.q6uV5lOyRO.png" alt=""></a>
+                        <a href="{{url('/')}}"><img src="assets/img/logo/xlogo.png.pagespeed.ic.q6uV5lOyRO.png" alt=""></a>
                      </div>
                      <div class="main-menu d-none d-lg-block">
                         <nav>
@@ -128,7 +128,7 @@
                               </div>
                            </li>
                            <li> <a href="login.html"><span class="flaticon-user"></span></a></li>
-                           <li class="cart"><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
+                           <li class="cart"><a href="{{url('/show-cart')}}"><span class="flaticon-shopping-cart"></span></a> </li>
                         </ul>
                      </div>
                   </div>
