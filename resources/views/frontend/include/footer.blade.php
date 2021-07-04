@@ -34,7 +34,7 @@
                   <div class="single-footer-caption mb-50">
                      <div class="single-footer-caption mb-20">
                         <div class="footer-logo mb-35">
-                           <a href="index-2.html"><img src="assets/img/logo/xlogo2_footer.png.pagespeed.ic.Y7hSWQIxaw.png" alt=""></a>
+                           <a href="index-2.html"><img src="assets/img/logo/ebazarshodai.png" alt=""></a>
                         </div>
                      </div>
                   </div>

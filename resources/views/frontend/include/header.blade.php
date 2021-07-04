@@ -6,10 +6,10 @@
       <title>@yield('page-title')</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/xfavicon.png.pagespeed.ic.nKD-xMXOhN.png') }}">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/eBazaarShodai-icon.ico') }}">
       <link rel="stylesheet" href="{{ asset('assets/css/A.bootstrap.min.css%2bowl.carousel.min.css%2bslicknav.css%2bflaticon.css%2banimate.min.css%2bprice_rangs.css%2bmagnific-popup.css%2bfontawesome-all.min.css%2bthemify-icons.cs') }}" />
-      <!-- <link rel="stylesheet" href="{{ asset('assets/css/style.php') }}"> -->
       @include('frontend.include.style')
+      
    </head>
    <body>
       <div id="preloader-active">
@@ -17,7 +17,8 @@
             <div class="preloader-inner position-relative">
                <div class="preloader-circle"></div>
                <div class="preloader-img pere-text">
-                  <img src="{{ asset('assets/img/icon/xloder.png.pagespeed.ic.nKD-xMXOhN.png') }}" alt="loder">
+                  <!-- <img src="{{ asset('assets/img/icon/xloder.png.pagespeed.ic.nKD-xMXOhN.png') }}" alt="loder"> -->
+                  <img src="{{ asset('assets/img/icon/eBazaarShodai-icon.ico') }}" alt="loder">
                </div>
             </div>
          </div>
@@ -59,7 +60,7 @@
                <div class="container">
                   <div class="menu-wrapper">
                      <div class="logo">
-                        <a href="{{url('/')}}"><img src="assets/img/logo/xlogo.png.pagespeed.ic.q6uV5lOyRO.png" alt=""></a>
+                        <a href="{{url('/')}}"><img src="assets/img/logo/ebazarshodai.png" alt="ebazarshodai"></a>
                      </div>
                      <div class="main-menu d-none d-lg-block">
                         <nav>

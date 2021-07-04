@@ -424,7 +424,7 @@ Home | E-BazaarShodai
          }
       });
       function addToCart(productId){
-         console.log('productId:' + productId);
+         
          $.ajax({
                url:"{{url('/add-to-cart')}}",
                method:"POST",
@@ -432,7 +432,11 @@ Home | E-BazaarShodai
                dataType:"JSON",
                success:function(response)
                {
-                  
+                  console.log('response:' + response.status);
+                  if(response.status == "success"){
+                     window.location.reload();
+                  }
+                  // $(document).find('.header-right').load(window.location.href +  ' .header-right');
                }
          });
       }

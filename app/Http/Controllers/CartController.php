@@ -29,7 +29,7 @@ class CartController extends Controller
         Cart::add($data);
 
         if(isset($request->action) && $request->action == "cartIcon"){
-            return \redirect('/');
+            return json_encode(["status" => "success"], 200);
         }
 
     	return \redirect('/show-cart');
